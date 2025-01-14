@@ -17,19 +17,37 @@ import com.tutor.tutorapp.Service.MyUserDetails;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
     @Autowired
-    MyUserDetails mydetails;
+    private MyUserDetails mydetails;
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable()); // Enable CORS and disable CSRF for testing
-        return http.authorizeHttpRequests(Registry->{Registry.requestMatchers("/home").permitAll();
-    Registry.anyRequest().authenticated();})   
-         .build();
+        http.csrf(csrf -> csrf.disable()) // Disable CSRF for testing
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/home", "/login","/add", "/register","/biddata/**", "/css/**", "/js/**").permitAll() // Allow access to public endpoints
+                .anyRequest().authenticated() // All other requests require authentication
+            )
+            .formLogin(form -> form
+                .loginPage("/login") // Custom login page
+                .permitAll() // Allow everyone to access the login page
+                .defaultSuccessUrl("/home", true) // Redirect to /home after successful login
+                .failureUrl("/login?error=true") // Redirect to /login with an error on failure
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout") // Redirect to login page after logout
+                .permitAll()
+            );
+
+        return http.build();
     }
+
     @Bean
-    public UserDetailsService userDetailsService(){
-       return mydetails;
+    public UserDetailsService userDetailsService() {
+        return mydetails;
     }
+
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -44,4 +62,3 @@ public class SecurityConfig {
         return NoOpPasswordEncoder.getInstance();
     }
 }
-

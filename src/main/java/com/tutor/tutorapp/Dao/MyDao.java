@@ -10,4 +10,6 @@ import com.tutor.tutorapp.Userinfo;
 @Repository
 public interface  MyDao extends JpaRepository<Userinfo, Long>{
 Optional<Userinfo> findByusername(String username);
+
+void save(long id);
 }

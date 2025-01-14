@@ -1,5 +1,8 @@
 package com.tutor.tutorapp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import  jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,4 +20,12 @@ public String email;
 public long  mobile;
 public String password;
 public String confirmPassword;
+public List<Long> bidid = new ArrayList<>();
+ public List<Long> getBidid() {
+        return bidid;
+    }
+
+    public void setBidid(List<Long> bidid) {
+        this.bidid = bidid;
+    }
 }
