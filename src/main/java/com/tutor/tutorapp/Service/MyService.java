@@ -1,7 +1,7 @@
 package com.tutor.tutorapp.Service;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class MyService {
         // Fetch the corresponding Userinfo object by username
         Userinfo userinfo = mydao.findByusername(username).orElseThrow(() -> 
             new RuntimeException("User not found for username: " + username));
-
+            
         // Retrieve the bidid list and ensure it's initialized
         List<Long> bidIds = userinfo.getBidid(); // Assuming bidid is stored as List<Long>
         

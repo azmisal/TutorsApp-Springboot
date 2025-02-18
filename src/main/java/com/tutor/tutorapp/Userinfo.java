@@ -20,6 +20,12 @@ public String email;
 public long  mobile;
 public String password;
 public String confirmPassword;
+public Role role;
+public enum Role {
+    admin,
+    teacher,
+    student
+}
 public List<Long> bidid = new ArrayList<>();
  public List<Long> getBidid() {
         return bidid;
