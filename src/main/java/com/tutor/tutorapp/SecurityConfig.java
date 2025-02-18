@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .requestMatchers("/ADMIN/**").hasAuthority("admin")
                 .requestMatchers("/teacher/**").hasAuthority("teacher")
                 .requestMatchers("./student/**").hasAuthority("student")
-                .requestMatchers("/home", "/login","/add", "/register","/biddata/**", "/css/**", "/js/**").permitAll() // Allow access to public endpoints
+                .requestMatchers("/home", "/login","/add", "/register","/biddata/**", "/css/**", "/js/**","/signup").permitAll() // Allow access to public endpoints
                 .anyRequest().authenticated() // All other requests require authentication
             )
             .formLogin(form -> form
