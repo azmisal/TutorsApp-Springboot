@@ -23,11 +23,11 @@ public String password;
 @Transient
 public String confirmPassword;
 public String role;
-public enum Role {
-    admin,
-    teacher,
-    student
-}
+// public enum Role {
+//     admin,
+//     teacher,
+//     student
+// }
 @Transient
 public List<Long> bidid = new ArrayList<>();
  public List<Long> getBidid() {
