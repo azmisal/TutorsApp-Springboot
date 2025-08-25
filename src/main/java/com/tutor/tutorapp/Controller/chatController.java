@@ -1,31 +1,32 @@
 package com.tutor.tutorapp.Controller;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import com.tutor.tutorapp.Dao.chatMessageRepo;
-import com.tutor.tutorapp.chatmessage;
+import com.tutor.tutorapp.DTO.ChatMessageDTO;
+import com.tutor.tutorapp.Service.ChatMessageService;
 
 @Controller // Marks this class as a controller for handling WebSocket messages
 public class ChatController {
 
-    @Autowired
-    private chatMessageRepo repository;
+   
+  
+    
 
-    // Constructor (explained below)
-    public ChatController(chatMessageRepo repository) {
-        this.repository = repository;
+ private final ChatMessageService chatMessageService;
+
+    public ChatController(ChatMessageService chatMessageService) {
+        this.chatMessageService = chatMessageService;
     }
 
-    @MessageMapping("/send") // Maps frontend messages sent to "/app/send"
-    @SendTo("/queue/messages") // Broadcasts the message to "/queue/messages"
-    public chatmessage sendMessage(chatmessage message) {
-        message.setTimestamp(LocalDateTime.now().toString());
-        repository.save(message); // Saves message to the database
-        return message; // Returns the message to be sent back to clients
+    @GetMapping("/threads/{threadId}/messages")
+    public List<ChatMessageDTO> getMessages(@PathVariable Long threadId) {
+        return chatMessageService.getMessages(threadId)
+                .stream()
+                .map(ChatMessageDTO::fromEntity)
+                .toList();
     }
 }

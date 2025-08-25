@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.tutor.tutorapp.Dao.DaoBid;
 import com.tutor.tutorapp.Dao.MyDao;
-import com.tutor.tutorapp.Userinfo;
-import com.tutor.tutorapp.biddata;
+import com.tutor.tutorapp.Entity.Userinfo;
+import com.tutor.tutorapp.Entity.biddata;
 
 @Service
 public class MyService {
@@ -55,5 +55,9 @@ public class MyService {
 
     public List<biddata> getbiddata() {
         return daobid.findAll();
+    }
+
+    public Userinfo findByEmail(String email) {
+        return mydao.findByEmail(email);
     }
 }

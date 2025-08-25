@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.tutor.tutorapp.Dao.MyDao;
-import com.tutor.tutorapp.Userinfo;
+import com.tutor.tutorapp.Entity.Userinfo;
 @Service
 public class MyUserDetails implements UserDetailsService {
     @Autowired

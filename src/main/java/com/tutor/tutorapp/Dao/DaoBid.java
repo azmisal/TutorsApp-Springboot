@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.tutor.tutorapp.biddata;
+import com.tutor.tutorapp.Entity.biddata;
 
 @Repository
 public interface  DaoBid extends JpaRepository<biddata,Long>{
